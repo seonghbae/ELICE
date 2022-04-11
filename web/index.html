@@ -18,11 +18,25 @@
             }
             #container{
                 display:grid;
-                grid-template-columns: 150px 1fr;;
+                grid-template-columns: 150px 1fr;
             }
         </style>
     </head>
     <body>
+        <input type="button" value="night" 
+        onclick="
+            //alert('야간!');
+            document.querySelector('body').style.backgroundColor = 'black';
+            document.querySelector('body').style.color = 'white';
+        "
+        onmouseleave="
+            //alert('안녕히가세요!');
+        ">
+        <input type="button" value="day" 
+        onclick="
+            document.querySelector('body').style.backgroundColor = 'white';
+            document.querySelector('body').style.color = 'black';
+        ">
         <h1><a href="index.html">WEB</a></h1>
         <div id="container">
             <ol>
