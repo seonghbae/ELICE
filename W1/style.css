@@ -1,0 +1,17 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.one {
+    background: linear-gradient(rgb(202, 110, 202), rgb(68, 68, 172), rgb(92, 142, 207), rgb(50, 106, 190), rgb(91, 91, 230), white);
+
+    width: 100vw;
+    height: 100vh;
+
+    text-align: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
