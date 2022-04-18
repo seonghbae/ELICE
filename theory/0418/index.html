@@ -11,17 +11,35 @@
         </script>
     </head>
     <body>
-        <h1><a href="index.html">WEB</a></h1>
+        <h1><a href="index.html" onclick="
+            event.preventDefault();
+            document.querySelector('article').innerHTML = `<h2>Welcome</h2>Hello, WEB!`;
+        ">WEB</a></h1>
         <nav>
             <ol></ol>
         </nav>
-        <h2>Welcome</h2>
-        Hello, WEB
+        <article>
+            <h2>Welcome</h2>
+            Hello, WEB
+        </article>
         <script>
-            function nav(){
+            let nav = ()=>{
                 let navTag = '';
                 for(let i=0; i<topics.length; i++) {
-                    navTag += `<li><a href="/read/${topics[i].id}">${topics[i].title}</a></li>`;
+                    navTag += `
+                        <li>
+                            <a href="/read/${topics[i].id}" id="${topics[i].id}" onclick="
+                                event.preventDefault();
+                                for(let i=0; i<topics.length; i++) {
+                                    if(topics[i].id === Number(event.target.id)) {
+                                        document.querySelector('article').innerHTML = '<h2>${topics[i].title}</h2>${topics[i].body}';
+                                        break;
+                                    }
+                                }
+                            ">
+                                ${topics[i].title}
+                            </a>
+                        </li>`;
                 }
                 document.querySelector('nav ol').innerHTML = navTag;
             }
