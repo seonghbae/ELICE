@@ -74,9 +74,22 @@
             function update(){}
             // delete는 예약어이기 때문에 사용 불가능
             function del(){}
-            function control(){}
+            function control(){
+                let contextUI = '';
+                if(selectedId !== null){
+                    contextUI = `
+                        <li><a href="/update">Update</a></li>
+                        <li><a href="/delete">Delete</a></li>
+                    `;
+                }
+                document.querySelector('#control').innerHTML = `
+                    <li><a href="/create">Create</a></li>
+                    ${contextUI}
+                `;
+            }
             nav(); // 시작부터 필요하니까 바로 호출
             welcome();
+            control();
         </script>
     </body>
 </html>
