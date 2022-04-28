@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>목록 만들기</title>
+  <link rel="stylesheet" href="index.css">
+  <!--- index.js를 불러옵니다 --->
+  <script src="index.js" type="module" defer></script>
+</head>
+<body>
+  <div class="container">
+  
+    <div class="item">
+      <h3>프로그래밍 관련 용어 모음</h3>
+        <button id="buttonGetWordList">목록 불러오기</button>
+        <br />
+        <ol id="wordList"></ol>
+    </div>
+    
+    <div class="item">
+      <h3>용어 추가하기</h3>
+      <form>
+        <input type="text" id="inputWord" placeholder="React" />
+        <button id="buttonAddWord">추가</button>
+      </form>
+    </div>
+    
+    <div class="item">
+      <h3>용어 모음 초기화하기</h3>
+      <form>
+        <button id="buttonDeleteAll">초기화</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
