@@ -14,7 +14,5 @@
 }
 
 .list_delete_btn {
-  /* z-index: 1; */
-  opacity: 1;
   cursor: pointer;
 }

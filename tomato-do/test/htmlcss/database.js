@@ -26,26 +26,30 @@ onRequest.onerror = () => {
 }
 
 const getKeyFromDb = (storeName, entry) => {
-    const database = onRequest.result
-    const transaction = database.transaction([storeName])
-    const store = transaction.objectStore(storeName)
 
-    const request = store.openCursor()
-    request.onerror = () => {
-        return request.error
-        console.log('error getting data from the store')
-    }
-
-    request.onsuccess = (e) => {
-        let cursor = e.target.result;
-        console.log(cursor);
-        if(cursor) {
-            if(cursor.value === entry) {
-                return cursor.key;
-            }
-            else cursor.continue();
+    const data = new Promise((resolve, reject) => {
+        const database = onRequest.result
+        const transaction = database.transaction([storeName])
+        const store = transaction.objectStore(storeName)
+    
+        const request = store.openCursor()
+        request.onerror = () => {
+            console.log('error getting data from the store')
+            reject(request.error)
         }
-    }
+    
+        request.onsuccess = () => {
+            let cursor = request.result;
+            // console.log(cursor);
+            if(cursor) {
+                if(cursor.value === entry) {
+                    resolve(cursor.key);
+                } else cursor.continue();
+            }
+        }
+    })
+  
+    return Promise.resolve(data)
 }
 
 const addEntryToDb = (storeName, entry) => {
@@ -79,12 +83,23 @@ const getEntryFromDb = (storeName, id) => {
 }
 
 const deleteEntryFromDb = async (storeName, entry) => {
+    const id = await getKeyFromDb(storeName, entry);
+
     const database = onRequest.result;
     const transaction = database.transaction([storeName], "readwrite");
     const store = transaction.objectStore(storeName);
-    const id = await getKeyFromDb(storeName, entry);
-    console.log(id);
-    store.delete(id);
+    
+    const request = store.delete(id);
+    return new Promise((resolve, reject) => {
+        request.onerror = () => {
+            reject(request.error)
+            console.log('error getting data from the store')
+        }
+    
+        request.onsuccess = () => {
+            resolve(request.result)
+        }
+    });
 }
 
 const clearAllEntries = (storeName) => {

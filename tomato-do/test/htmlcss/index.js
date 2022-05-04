@@ -4,17 +4,14 @@ const addTodo = (e) => {
     e.preventDefault();
     addEntryToDb('todolist', todoInput.value);
     showTodoList(e);
+    todoInput.value = null;
 }
 
 const deleteTodo = (e) => {
     e.preventDefault();
     const todoDelete = e.target.parentNode.parentNode.firstChild;
-    console.log(e.target);
-    console.log(e.target.parentNode);
-    console.log(todoDelete);
-    console.log(todoDelete.innerText);
-    deleteEntryFromDb('todolist', todoDelete.innerText);
-    showTodoList(e);
+    deleteEntryFromDb('todolist', todoDelete.innerText)
+        .then(() => showTodoList(e));
 }
 
 const showTodoList = async (e) => {
