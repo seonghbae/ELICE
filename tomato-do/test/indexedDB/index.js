@@ -1,19 +1,15 @@
 import { addEntryToDb, getEntryFromDb, clearAllEntries } from "./database.js"
 
-// addWord 함수를 작성합니다.
 const addWord = (e) => {
     e.preventDefault();
     addEntryToDb('programmingwords', document.querySelector('#inputWord').value);
 }
 
-// deleteList 함수를 작성합니다.
 const deleteList = (e) => {
     e.preventDefault();
     clearAllEntries('programmingwords');
 }
 
-
-//여기서부터 아래의 코드는, 수정하지 않아도 됩니다.
 const showWordList = async (e) => {
   e.preventDefault()
   
