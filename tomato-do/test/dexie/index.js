@@ -27,6 +27,39 @@ const completeTodo = (e) => {
 
 const updateTodo = (e) => {
     e.preventDefault();
+
+    // 수정할 내용을 받아줄 input 박스와 수정(완료) 버튼을 생성
+    const todoUpdate = e.target.parentNode.parentNode;
+    const todoItemElem = document.createElement("li");
+    todoItemElem.innerHTML = todoUpdate.innerHTML;
+
+    const updateTodoElem = document.createElement("input");
+    updateTodoElem.setAttribute("id", "todo_update_submit_btn");
+    updateTodoElem.setAttribute("type", "submit");
+    updateTodoElem.setAttribute("value", "수정");
+    updateTodoElem.addEventListener("click", (e) => updateTodoComplete(e, todoItemElem));
+
+    todoUpdate.innerHTML = `<input id="todo_update" type="input" value="${todoUpdate.firstChild.innerText}">`;
+    todoUpdate.appendChild(updateTodoElem);
+}
+
+// 수정(완료) 버튼을 누르면 실행되는 이벤트
+// 기존 li태그의 복사본을 인자로 받아 span태그의 내용만 갱신
+const updateTodoComplete = (e, todoItemElem) => {
+    e.preventDefault();
+
+    const todoUpdate = e.target.parentNode.firstChild;
+
+    const updateEntry = {
+        todo: todoItemElem.firstChild.innerText
+    }
+
+    const changes = {
+        todo: todoUpdate.value
+    }
+
+    updateEntryToDb('todolist', updateEntry, changes)
+        .then(() => showTodoList(e));
 }
 
 const deleteTodo = (e) => {
@@ -70,21 +103,21 @@ const showTodoList = async (e) => {
         checkboxElem.addEventListener("click", completeTodo);
         // checkboxElem.innerText = '✔';
 
-        const editButtonElem = document.createElement("button");
-        editButtonElem.classList.add("list_edit_btn");
-        editButtonElem.innerHTML = `<i class="fa-solid fa-pencil"></i>`;
-        editButtonElem.addEventListener("click", updateTodo);
+        const updateTodoElem = document.createElement("button");
+        updateTodoElem.classList.add("list_update_btn");
+        updateTodoElem.innerHTML = `<i class="fa-solid fa-pencil"></i>`;
+        updateTodoElem.addEventListener("click", updateTodo);
 
-        const deleteButtonElem = document.createElement("button");
-        deleteButtonElem.classList.add("list_delete_btn");
-        deleteButtonElem.addEventListener("click", deleteTodo);
-        deleteButtonElem.innerHTML = `<i class="fa-solid fa-trash-can"></i>`;
+        const deleteTodoElem = document.createElement("button");
+        deleteTodoElem.classList.add("list_delete_btn");
+        deleteTodoElem.addEventListener("click", deleteTodo);
+        deleteTodoElem.innerHTML = `<i class="fa-solid fa-trash-can"></i>`;
 
         todoItemElem.innerHTML += `<span class="list_name">${entry.todo}</span>`;
         todoItemElem.appendChild(checkboxElem);
         todoItemElem.innerHTML += `<label for="checklist"></label>`;
-        todoItemElem.appendChild(editButtonElem);
-        todoItemElem.appendChild(deleteButtonElem);
+        todoItemElem.appendChild(updateTodoElem);
+        todoItemElem.appendChild(deleteTodoElem);
 
         todoListTag.appendChild(todoItemElem);
     })
@@ -93,8 +126,8 @@ const showTodoList = async (e) => {
 const todoListTag = document.querySelector('#list_check')
 
 const todoInput = document.querySelector('#todo')
-const addTodoButton = document.querySelector('#todo_submit_btn')
+const addTodoElem = document.querySelector('#todo_submit_btn')
 
-addTodoButton.addEventListener("click", addTodo)
+addTodoElem.addEventListener("click", addTodo)
 
 initDatabase().then(() => showTodoList());
