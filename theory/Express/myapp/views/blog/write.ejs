@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>블로그 글쓰기</h1>
+    <form action="/blog/write" method="post">
+        <!-- name에 설정한 대로 넘어옴 -->
+        <input type="text" name="title">
+        <textarea name="content" id="" cols="30" rows="10"></textarea>
+        <input type="submit" value="전송하기">
+    </form>
+    
+</body>
+</html>
+
+<!-- 글의 제목이 뜨고 제목을 클릭했을 때 본문 내용으로 이동 -->

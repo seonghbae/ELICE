@@ -10,16 +10,15 @@
     <a data-doc="해리포터와 마법사의 돌" class="delete">지우기</a>
 </body>
 <script>
-    const trashcan = document.querySelector('a.delete');
-    trashcan.addEventListener('click', (e) => {
-      const endpoint = `/expost/del/${trashcan.dataset.doc}`;
-      fetch(endpoint, {
-        method: 'DELETE',
-      })
-      .then(response => response.json())
-      .then(data => window.location.href = data.redirect)
-      .catch(err => console.log(err));
-    });
-
-  </script>
+  const trashcan = document.querySelector('a.delete');
+  trashcan.addEventListener('click', (e) => {
+    const endpoint = `/expost/del/${trashcan.dataset.doc}`;
+    fetch(endpoint, {
+      method: 'DELETE',
+    })
+    .then(response => response.json())
+    .then(data => window.location.href = data.redirect)
+    .catch(err => console.log(err));
+  });
+</script>
 </html>

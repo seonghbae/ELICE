@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 const testRouter = require('./routes/call');
 const postRouter = require('./routes/post');
 const dbconnect = require('./models/index');
+const blogRouter = require('./routes/blog');
 dbconnect();
 
 var app = express();
@@ -29,6 +30,7 @@ app.use('/users', usersRouter);
 app.use('/test', testRouter);
 //localhost:3000/expost
 app.use('/expost', postRouter);
+app.use('/blog', blogRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
