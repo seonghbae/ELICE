@@ -13,7 +13,7 @@
     <p>글 내용들</p>
     <!-- localhost:3000/blog/write -->
     <% for(let i = 0; i < content.length; i++) { %>
-        <a href=""><%=content[i].title %></a>
+        <a href="/blog/read/<%=content[i].no %>"><%=content[i].title %></a>
         <!-- 변수 할당 -->
         <br><br>
     <% } %>
