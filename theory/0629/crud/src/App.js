@@ -1,10 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
 import { Header } from './Header';
-import { Routes, Route, useParams } from 'react-router-dom';
+import { Routes, Route, useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Welcome } from './Welcome';
 import { Nav } from './Nav';
+
+function Control() {
+  return <ul>
+    <li><Link to="/create">Create</Link></li>
+  </ul>
+}
 
 function App() {
   const [topics, setTopics] = useState([]);
@@ -27,6 +33,7 @@ function App() {
         <Route path="/" element={<Welcome></Welcome>}></Route>
         <Route path="/read/:id" element={<Read></Read>}></Route>
       </Routes>
+      <Control></Control>
     </div>
   );
 }
