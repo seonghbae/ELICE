@@ -17,7 +17,7 @@ function App() {
   const [topics, setTopics] = useState([]);
 
   async function refresh() {
-    const resp = await fetch('http://localhost:3300/topics');
+    const resp = await fetch('/topics');
     const data = await resp.json();
     setTopics(data);
   }
@@ -41,9 +41,21 @@ function App() {
 function Read() {
   const params = useParams();
   const id = Number(params.id);
+  const [topic, setTopic] = useState({ title: null, body: null });
+
+  async function refresh() {
+    const resp = await fetch('/topics' + id);
+    const data = await resp.json();
+    setTopic(data);
+  }
+
+  useEffect(() => {
+    refresh();
+  }, []);
+
   return <article>
-    <h2>Read</h2>
-    Hello, Read {id}
+    <h2>{topic.title}</h2>
+    {topic.body}
   </article>
 }
 
