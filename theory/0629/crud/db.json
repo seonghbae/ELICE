@@ -6,14 +6,9 @@
       "body": "html is ..."
     },
     {
-      "id": 2,
-      "title": "css",
-      "body": "css is ..."
-    },
-    {
-      "title": "js",
-      "body": "js is ...",
-      "id": 3
+      "title": "css2",
+      "body": "css2 is ...",
+      "id": 2
     }
   ]
 }
