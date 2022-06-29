@@ -12,6 +12,17 @@ function Control() {
   </ul>
 }
 
+function Create() {
+  return <article>
+    <h1>Create</h1>
+    <form>
+      <p><input type="text" name="title" placeholder="title"></input></p>
+      <p><textarea name="body" placeholder="body"></textarea></p>
+      <p><input type="submit" value="create"></input></p>
+    </form>
+  </article>
+}
+
 function App() {
   const [topics, setTopics] = useState([]);
 
@@ -32,6 +43,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Welcome></Welcome>}></Route>
         <Route path="/read/:id" element={<Read></Read>}></Route>
+        <Route path="/create" element={<Create></Create>}></Route>
       </Routes>
       <Control></Control>
     </div>
