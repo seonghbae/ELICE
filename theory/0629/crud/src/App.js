@@ -5,10 +5,10 @@ import { Link, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Welcome } from './Welcome';
 
-function Nav() {
+function Nav(props) {
   return <nav>
     <ol>
-      <li><Link to="/read/1">html</Link></li>
+      {props.data.map((e) => <li key={e.id}><Link to={`/read/${e.id}`}>{e.title}</Link></li>)}
     </ol>
   </nav>
 }
@@ -20,7 +20,6 @@ function App() {
     const resp = await fetch('http://localhost:3300/topics');
     const data = await resp.json();
     setTopics(data);
-    console.log(data);
   }
 
   useEffect(() => {
@@ -30,7 +29,7 @@ function App() {
   return (
     <div>
       <Header></Header>
-      <Nav></Nav>
+      <Nav data={topics}></Nav>
       <Routes>
         <Route path="/" element={<Welcome></Welcome>}></Route>
         <Route path="/read/1" element={<Read></Read>}></Route>
