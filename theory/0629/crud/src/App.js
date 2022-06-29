@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { Header } from './Header';
-import { Link, Routes, Route } from 'react-router-dom';
+import { Link, Routes, Route, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Welcome } from './Welcome';
 
@@ -32,16 +32,18 @@ function App() {
       <Nav data={topics}></Nav>
       <Routes>
         <Route path="/" element={<Welcome></Welcome>}></Route>
-        <Route path="/read/1" element={<Read></Read>}></Route>
+        <Route path="/read/:id" element={<Read></Read>}></Route>
       </Routes>
     </div>
   );
 }
 
 function Read() {
+  const params = useParams();
+  const id = Number(params.id);
   return <article>
     <h2>Read</h2>
-    Hello, Read
+    Hello, Read {id}
   </article>
 }
 
