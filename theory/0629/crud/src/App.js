@@ -1,17 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
 import { Header } from './Header';
-import { Link, Routes, Route, useParams } from 'react-router-dom';
+import { Routes, Route, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Welcome } from './Welcome';
-
-function Nav(props) {
-  return <nav>
-    <ol>
-      {props.data.map((e) => <li key={e.id}><Link to={`/read/${e.id}`}>{e.title}</Link></li>)}
-    </ol>
-  </nav>
-}
+import { Nav } from './Nav';
 
 function App() {
   const [topics, setTopics] = useState([]);
