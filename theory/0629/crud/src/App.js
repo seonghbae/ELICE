@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { Header } from './Header';
-import { Link } from 'react-router-dom';
+import { Link, Routes, Route } from 'react-router-dom';
 
 function Nav() {
   return <nav>
@@ -9,6 +9,13 @@ function Nav() {
       <li><Link to="/read/1">html</Link></li>
     </ol>
   </nav>
+}
+
+function Read() {
+  return <article>
+    <h2>Read</h2>
+    Hello, Read
+  </article>
 }
 
 function Welcome() {
@@ -23,7 +30,10 @@ function App() {
     <div>
       <Header></Header>
       <Nav></Nav>
-      <Welcome></Welcome>
+      <Routes>
+        <Route path="/" element={<Welcome></Welcome>}></Route>
+        <Route path="/read/1" element={<Read></Read>}></Route>
+      </Routes>
     </div>
   );
 }
