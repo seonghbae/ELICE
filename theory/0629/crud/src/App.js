@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import { Header } from './Header';
 import { Link, Routes, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Welcome } from './Welcome';
 
 function Nav() {
   return <nav>
@@ -11,21 +13,20 @@ function Nav() {
   </nav>
 }
 
-function Read() {
-  return <article>
-    <h2>Read</h2>
-    Hello, Read
-  </article>
-}
-
-function Welcome() {
-  return <article>
-    <h2>Welcome</h2>
-    Hello, WEB
-  </article>
-}
-
 function App() {
+  const [topics, setTopics] = useState([]);
+
+  async function refresh() {
+    const resp = await fetch('http://localhost:3300/topics');
+    const data = await resp.json();
+    setTopics(data);
+    console.log(data);
+  }
+
+  useEffect(() => {
+    refresh();
+  }, []);
+
   return (
     <div>
       <Header></Header>
@@ -36,6 +37,13 @@ function App() {
       </Routes>
     </div>
   );
+}
+
+function Read() {
+  return <article>
+    <h2>Read</h2>
+    Hello, Read
+  </article>
 }
 
 export default App;
